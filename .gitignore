@@ -1,0 +1,7 @@
+/.vs/
+/bin/
+*.opendb
+*.sln
+*.vcxproj
+*.vcxproj.filters
+*.vcxproj.user
