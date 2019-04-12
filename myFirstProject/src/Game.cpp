@@ -1,38 +1,85 @@
 #include "Game.h"
+#include <conio.h>
+
 
 Game::Game()
 {
 }
 
-
 Game::~Game()
 {
 }
 
-void Game::PrintWizardInfo(Wizard* wizzy)
+void Game::Play()
 {
-	std::cout << "Good! Your name is : " << wizzy->GetName() << std::endl;
-	std::cout << "And your age is: " << wizzy->GetAge() << std::endl;
+	PrintMenu();
 }
 
-void Game::PrintWizardKnownSpells(Wizard* wizzy)
+void Game::PrintMenu()
 {	
-	std::vector<Spell>* SpellBook = wizzy->GetSpellBook();
+	int exitMenu = false;
+	char choise;
 
-	int spellsBookSize = wizzy->GetSpellBook()->size();
-	std::cout << "Number of known spells: " << spellsBookSize << std::endl;
+	while (!exitMenu)
+	{	
+		std::cout << std::string(100, '\n');
+		std::cout << std::endl;
+		std::cout << "Choose one of the following:\n";
+		std::cout << " - Open Inventory (Press 'i')\n";
+		std::cout << " - Review the Spells you know (Press 's')\n";
+		std::cout << " - Go to a Learning Session (Press 'l')\n";
+		std::cout << " - Fight another Wizard/Witch (Press 'f')\n";
+		std::cout << " - Exit Menu (Press 'e')\n\n";
 
-	if (spellsBookSize == 0)
-	{
-		std::cout << "The wizard " << wizzy->GetName() << " doesn't know any spells." << std::endl;
-		std::cout << "--------------------" << std::endl;
-	}
-	else {
-		// print known spells
-		std::cout << "Spells that the wizard knows: " << std::endl;
-		for (int i = 0; i < spellsBookSize; i++)
-		{	
-			std::cout << "- " << (*SpellBook)[i].m_Name << std::endl;
+		choise = _getwch();
+
+		switch (choise)
+		{
+		case 'i':
+			m_MainCharacter.PrintInventory();
+			break;
+
+		case 's':
+			m_MainCharacter.PrintKnownSpells();
+			break;
+
+		case 'l':
+			m_MainCharacter.LearnSpell();
+			break;
+
+		case 'e':
+			std::cout << "You are exiting the menu.\n\n";
+			exitMenu = true;
+			break;
+
+		default:
+			std::cout << "Please insert a valid option.\n";
+			break;
 		}
+		system("PAUSE");
 	}
+}
+
+void Game::PrintIntroduction()
+{
+	std::cout << "<<< Welcome to Spellcraft >>>\n" << std::endl; 
+	std::cout << "Please enter your name: " << std::endl;
+
+	std::string name;
+	std::cin >> name;
+	m_MainCharacter.SetName(name);
+
+	std::cout << "Please enter your age: " << std::endl;
+	int age;
+	std::cin >> age;
+	m_MainCharacter.SetAge(age);
+
+	std::cout << "\nVery well!\n";
+
+	m_MainCharacter.PrintPersonalInfo();
+	m_MainCharacter.PrintInventory();
+
+	std::cout << "\nHere begins your Journey!\n\n"; 
+	system("pause");
+	std::cout << std::string(100, '\n');
 }

@@ -5,16 +5,19 @@
 #include <vector>
 
 #include "Wizard.h"
-#include "Spell.h"
 
 class Game
 {
 public:
 	Game();
 	~Game();
+	
+	void PrintIntroduction();
+	void PrintMenu();
 
-	void PrintWizardInfo(Wizard* wizzy);
-	void PrintWizardKnownSpells(Wizard* wizzy);
+	void Play();
+
+	Wizard m_MainCharacter;
 
 };
 

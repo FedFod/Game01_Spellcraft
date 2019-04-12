@@ -1,26 +1,36 @@
 #pragma once
 #include "Spell.h"
+#include "Object.h"
 #include <iostream>
 
 class Wizard
 {
-
 public:
 	Wizard(const std::string& name, int age);
 	Wizard();
 
 	~Wizard();
-	
-	void LearnSpell(Spell& spell);
 
-	std::string GetName();
-	int			GetAge();
+	//----------
+
+	std::string GetName() const;
+	int			GetAge()  const;
 	std::vector<Spell>* GetSpellBook();
+
+	void SetName(const std::string& name);
+	void SetAge(int age);
+
+	void LearnSpell();
+
+	void PrintInventory();
+	void PrintPersonalInfo();
+	void PrintKnownSpells();
 
 private:
 	std::string m_Name;
 	int m_Age;
 
-	std::vector<Spell> m_SpellBook;
+	std::vector<Object> m_Inventory;
+	std::vector<Spell>  m_SpellBook;
 };
 
