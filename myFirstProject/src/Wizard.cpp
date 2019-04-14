@@ -81,6 +81,7 @@ void Wizard::LearnSpell()
 		std::cout << ">> Congratulations! You just learnt the Spell << " << spellToLearn.GetName() << " >>\n\n";
 
 		std::cout << "Do you want to learn more? < y/n >\n";
+
 		char quit = _getwch();
 		if (quit == 'n')
 		{
