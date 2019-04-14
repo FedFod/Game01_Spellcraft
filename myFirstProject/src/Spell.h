@@ -3,6 +3,9 @@
 #include <vector>
 #include <iostream>
 
+#define SEPARATOR "********************\n"
+#define SMALLSEP "*******\n"
+
 class Spell
 {
 public:
@@ -44,10 +47,24 @@ struct MasterSpellBook
 	static Spell HealingSpells[healingSpellsNum];
 
 	static void PrintMasterSpellBook()
-	{
+	{	
+		std::cout << "+ Fire Spells + " << std::endl;
 		for (int i = 0; i < fireSpellsNum; i++) {
-			std::cout << FireSpells[i].GetName() << std::endl;
+			std::cout << " - " << FireSpells[i].GetName() << std::endl;
 		}
+		std::cout << std::endl;
+
+		std::cout << "+ Water Spells + " << std::endl;
+		for (int i = 0; i < waterSpellsNum; i++) {
+			std::cout << " - " << WaterSpells[i].GetName() << std::endl;
+		}
+		std::cout << std::endl;
+
+		std::cout << "+ Healing Spells + " << std::endl;
+		for (int i = 0; i < healingSpellsNum; i++) {
+			std::cout << " - " << HealingSpells[i].GetName() << std::endl;
+		}
+		std::cout << SMALLSEP << std::endl;
 	}
 };
 

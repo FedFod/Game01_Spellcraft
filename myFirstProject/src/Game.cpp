@@ -1,7 +1,6 @@
 #include "Game.h"
 #include <conio.h>
 
-
 Game::Game()
 {
 }
@@ -17,21 +16,25 @@ void Game::Play()
 
 void Game::PrintMenu()
 {	
-	int exitMenu = false;
+	bool exitMenu = false;
 	char choise;
 
 	while (!exitMenu)
 	{	
-		std::cout << std::string(100, '\n');
+		//std::cout << std::string(100, '\n');
 		std::cout << std::endl;
-		std::cout << "Choose one of the following:\n";
-		std::cout << " - Open Inventory (Press 'i')\n";
-		std::cout << " - Review the Spells you know (Press 's')\n";
-		std::cout << " - Go to a Learning Session (Press 'l')\n";
-		std::cout << " - Fight another Wizard/Witch (Press 'f')\n";
-		std::cout << " - Exit Menu (Press 'e')\n\n";
+		std::cout << SEPARATOR;
+		std::cout << ">> GAME MENU\n";
+		std::cout << " - Open Inventory < i >\n";
+		std::cout << " - Review the Spells you know < s >\n";
+		std::cout << " - Go to a Learning Session < l >\n";
+		std::cout << " - Fight another Wizard/Witch < f >\n";
+		std::cout << " - Exit Game < e >\n";
+		std::cout << SEPARATOR << "\n";
 
 		choise = _getwch();
+		std::cout << ">> You chose: " << choise << std::endl;
+		std::cout << std::endl;
 
 		switch (choise)
 		{
@@ -56,30 +59,33 @@ void Game::PrintMenu()
 			std::cout << "Please insert a valid option.\n";
 			break;
 		}
-		system("PAUSE");
+
+		std::cout << "(Go back to menu < b >)" << std::endl;
+		choise = _getwch();
 	}
 }
 
 void Game::PrintIntroduction()
 {
-	std::cout << "<<< Welcome to Spellcraft >>>\n" << std::endl; 
-	std::cout << "Please enter your name: " << std::endl;
+	std::cout << "*** Welcome to Spellcraft ***\n" << std::endl; 
+	std::cout << ">> Please enter your name: " << std::endl;
 
 	std::string name;
 	std::cin >> name;
 	m_MainCharacter.SetName(name);
 
-	std::cout << "Please enter your age: " << std::endl;
+	std::cout << ">> Please enter your age: " << std::endl;
 	int age;
 	std::cin >> age;
 	m_MainCharacter.SetAge(age);
 
-	std::cout << "\nVery well!\n";
+	std::cout << "\n>> Very well!\n";
 
 	m_MainCharacter.PrintPersonalInfo();
 	m_MainCharacter.PrintInventory();
 
-	std::cout << "\nHere begins your Journey!\n\n"; 
-	system("pause");
-	std::cout << std::string(100, '\n');
+	std::cout << ">> Here begins your Journey!\n\n"; 
+	std::cout << "(Press any key to start your Journey)\n";
+	char tmpKey = _getwch();
+	//std::cout << std::string(100, '\n');
 }

@@ -20,13 +20,6 @@ Wizard::~Wizard()
 {
 }
 
-void Wizard::LearnSpell()
-{	
-	MasterSpellBook::PrintMasterSpellBook();
-	//m_SpellBook.push_back(spell);
-	//std::cout << "You have just learned the spell << " << spell.m_Name << " >>" << std::endl;
-}
-
 //----Getters----------------------
 std::string Wizard::GetName() const
 {
@@ -55,41 +48,55 @@ void Wizard::SetAge(int age)
 	m_Age = age;
 }
 
+//----LEARN SPELLS---------------
+void Wizard::LearnSpell()
+{	
+	std::cout << SMALLSEP;
+	std::cout << ">> Welcome to a learning session.\n";
+	std::cout << ">> These are the Spells you can learn: \n" << std::endl;
+	MasterSpellBook::PrintMasterSpellBook();
+	// Learn spell
+}
+
+
 //----PRINTERS-------------------
 void Wizard::PrintInventory()
-{
-	std::cout << "This is your current inventory: " << std::endl;
+{	
+	std::cout << SMALLSEP;
+	std::cout << ">> This is your current inventory: " << std::endl;
 	std::cout << std::endl;
 	for (int i = 0; i < m_Inventory.size(); i++)
 	{
 		std::cout << " - " << m_Inventory[i].m_Name << " x " << m_Inventory[i].m_Amount << std::endl;
 	}
-	std::cout << std::endl;
+	std::cout << SMALLSEP << std::endl;
 }
 
 void Wizard::PrintPersonalInfo()
 {
-	std::cout << "Your name is: " << m_Name << std::endl;
-	std::cout << "And your age is: " << m_Age << std::endl;
+	std::cout << ">> Your name is: " << m_Name << std::endl;
+	std::cout << ">> And your age is: " << m_Age << std::endl;
 	std::cout << std::endl;
 }
 
 void Wizard::PrintKnownSpells()
 {
 	int spellsBookSize = m_SpellBook.size();
-	std::cout << "Number of known spells: " << spellsBookSize << std::endl;
+	std::cout << SMALLSEP;
+	std::cout << ">> Number of known spells: " << spellsBookSize << std::endl;
 
 	if (spellsBookSize == 0)
 	{
-		std::cout << "The wizard " << m_Name << " doesn't know any spells.\n\n";
+		std::cout << ">> The wizard " << m_Name << " doesn't know any spells.\n";
 	}
 	else {
 		// print known spells
-		std::cout << "Spells that the wizard knows: " << std::endl;
+		std::cout << ">> Spells that the wizard knows: " << std::endl;
 		for (int i = 0; i < spellsBookSize; i++)
 		{
 			std::cout << "- " << m_SpellBook[i].GetName() << std::endl;
 		}
 	}
+	std::cout << SMALLSEP << std::endl;
 }
 //------------------------------------
