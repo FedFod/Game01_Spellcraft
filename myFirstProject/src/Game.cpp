@@ -14,6 +14,22 @@ void Game::Play()
 	PrintMenu();
 }
 
+void Game::GoBackToMenu(char choise)
+{
+	std::cout << "(Go back to menu < b >)" << std::endl;
+	choise = _getwch();
+	switch (choise)
+	{
+	case 'b':
+		break;
+	case 'B':
+		break;
+	default:
+		std::cout << "Please insert a valid option.\n";
+		break;
+	}
+}
+
 void Game::PrintMenu()
 {	
 	bool exitMenu = false;
@@ -40,10 +56,12 @@ void Game::PrintMenu()
 		{
 		case 'i':
 			m_MainCharacter.PrintInventory();
+			GoBackToMenu(choise);
 			break;
 
 		case 's':
 			m_MainCharacter.PrintKnownSpells();
+			GoBackToMenu(choise);
 			break;
 
 		case 'l':
@@ -51,7 +69,7 @@ void Game::PrintMenu()
 			break;
 
 		case 'e':
-			std::cout << "You are exiting the menu.\n\n";
+			std::cout << "You are exiting the Game.\n\n";
 			exitMenu = true;
 			break;
 
@@ -59,9 +77,6 @@ void Game::PrintMenu()
 			std::cout << "Please insert a valid option.\n";
 			break;
 		}
-
-		std::cout << "(Go back to menu < b >)" << std::endl;
-		choise = _getwch();
 	}
 }
 

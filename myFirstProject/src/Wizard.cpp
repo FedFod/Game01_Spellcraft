@@ -3,21 +3,27 @@
 
 Wizard::Wizard(const std::string& name, int age)
 	: m_Name(name), m_Age(age)
-{	
-	Gold gold;
-	m_Inventory.push_back(gold);
+{
+	InitializeInventory();
 }
 
 Wizard::Wizard()
 	: m_Name("Unknown"), m_Age(-1)
 {
-	Gold gold;
-	m_Inventory.push_back(gold);
+	InitializeInventory();
 }
 
 // Destructor
 Wizard::~Wizard()
 {
+}
+
+void Wizard::InitializeInventory()
+{
+	Gold gold;
+	Mana mana;
+	m_Inventory.push_back(gold);
+	m_Inventory.push_back(mana);
 }
 
 //----Getters----------------------
@@ -51,11 +57,36 @@ void Wizard::SetAge(int age)
 //----LEARN SPELLS---------------
 void Wizard::LearnSpell()
 {	
-	std::cout << SMALLSEP;
-	std::cout << ">> Welcome to a learning session.\n";
-	std::cout << ">> These are the Spells you can learn: \n" << std::endl;
-	MasterSpellBook::PrintMasterSpellBook();
-	// Learn spell
+	bool learningSession = true;
+	while (learningSession)
+	{
+		std::cout << SMALLSEP;
+		std::cout << ">> Welcome to a Learning Session.\n";
+		std::cout << ">> These are the Spells you can learn: \n" << std::endl;
+		MasterSpellBook::PrintMasterSpellBook();	
+		std::cout << "\n>> You have " << m_Inventory[1].GetAmount() << " parts of Mana. Use them to learn new Spells." << std::endl;
+		std::cout << ">> Which Spell do you want to learn?\n\n(Insert the Learning Code of the Spell < learning code >)" << std::endl;
+		std::cout << "(Go back to menu < b >)" << std::endl;
+		
+		int learnCode;
+		std::cin >> learnCode;
+		Spell spellToLearn = *MasterSpellBook::GetSpell(learnCode);
+		if (spellToLearn.GetCost() < 0) {
+			std::cout << ">> You have insert a wrong Learning Code.\n";
+		}
+		else {
+			m_SpellBook.push_back(spellToLearn);
+			m_Inventory[1].SetAmount(m_Inventory[1].GetAmount() - spellToLearn.GetCost());
+		}
+		std::cout << ">> Congratulations! You just learnt the Spell << " << spellToLearn.GetName() << " >>\n\n";
+
+		std::cout << "Do you want to learn more? < y/n >\n";
+		char quit = _getwch();
+		if (quit == 'n')
+		{
+			learningSession = false;
+		}
+	}
 }
 
 
@@ -67,7 +98,7 @@ void Wizard::PrintInventory()
 	std::cout << std::endl;
 	for (int i = 0; i < m_Inventory.size(); i++)
 	{
-		std::cout << " - " << m_Inventory[i].m_Name << " x " << m_Inventory[i].m_Amount << std::endl;
+		std::cout << " - " << m_Inventory[i].GetName() << " x " << m_Inventory[i].GetAmount() << std::endl;
 	}
 	std::cout << SMALLSEP << std::endl;
 }

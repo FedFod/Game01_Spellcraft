@@ -27,6 +27,9 @@ public:
 	void PrintKnownSpells();
 
 private:
+	void InitializeInventory();
+
+private:
 	std::string m_Name;
 	int m_Age;
 

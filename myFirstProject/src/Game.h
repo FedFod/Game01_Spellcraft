@@ -19,5 +19,7 @@ public:
 
 	Wizard m_MainCharacter;
 
+private:
+	void GoBackToMenu(char choise);
 };
 
